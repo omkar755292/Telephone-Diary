@@ -42,7 +42,7 @@ const Home = () => {
 
     return (
         <div className='container'>
-            <Header userName="omkar" />
+            <Header userName="user" />
             <Routes>
                 <Route exact path='/addcontact' element={<AddContact addContactHandler={addContactHandler} />} />
                 <Route exact path='/contactlist' element={<ContactList removeContactHandler={removeContactHandler} contactlist={contactlist} />} />
