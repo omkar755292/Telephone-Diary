@@ -4,7 +4,8 @@ import Register from './Register'
 import { Routes, Route } from 'react-router-dom';
 import Avatar from '../components/Avatar';
 
-const Index = () => {
+const Authentication = () => {
+
   return (
     <div className='index'>
       <div className='container'>
@@ -20,4 +21,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Authentication

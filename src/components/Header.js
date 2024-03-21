@@ -9,7 +9,7 @@ const Header = (props) => {
       <div className='container'>
         <nav className="navbar bg-body-tertiary">
           <div className="container-fluid">
-            <Link className="navbar-brand" to="/">
+            <Link className="navbar-brand" to="/home">
               <img src={logo} alt="Logo" width="32" height="32" className="d-inline-block align-text-top" />
               &nbsp;{props.userName}.TelephoneDiary
             </Link>

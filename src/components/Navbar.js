@@ -6,10 +6,10 @@ const Navbar = () => {
         <div className='container'>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <Link class="nav-link active" aria-current="page" to="/addcontact">Add Contact</Link>
+                    <Link class="nav-link active" aria-current="page" to="/home/addcontact">Add Contact</Link>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" to="/contactlist">Contact lIst</Link>
+                    <Link class="nav-link" to="/home/contactlist">Contact lIst</Link>
                 </li>
             </ul>
         </div>
