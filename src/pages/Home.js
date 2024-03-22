@@ -14,9 +14,9 @@ const Home = () => {
         const fetchUserDetails = async () => {
             try {
                 const response = await api.get('/api/user/root');
-                const { username, email, user_id } = response.data;
+                const { username, email, id } = response.data;
                 const firstName = username.split(' ')[0];
-                setUserDetails({ username, user_id, email, firstName });
+                setUserDetails({ username, id, email, firstName });
             } catch (error) {
                 console.error('Error fetching user details:', error);
             }
@@ -57,7 +57,7 @@ const Home = () => {
 
     return (
         <div className='container'>
-            <Header userName={userDetails.firstName || 'Guest'} />
+            <Header user={userDetails} />
             <Routes>
                 <Route exact path='/' element={<AddContact addContactHandler={addContactHandler} />} />
                 <Route exact path='/addcontact' element={<AddContact addContactHandler={addContactHandler} />} />

@@ -49,7 +49,7 @@ const AddContact = (props) => {
             placeholder="Enter Phone number" 
             required/>
         </div>
-        <button class="btn btn-primary" type="submit">SaVe</button>
+        <button class="btn btn-primary" type="submit">Save</button>
       </form >
     </div>
   )
