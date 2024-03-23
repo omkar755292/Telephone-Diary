@@ -22,7 +22,7 @@ const Home = () => {
             }
         };
         fetchUserDetails();
-    }, [setUserDetails]);
+    }, []);
 
     const retrieveContacts = async () => {
         const response = await api.get('/api/contact');

@@ -9,7 +9,7 @@ const Navbar = () => {
                     <Link class="nav-link active" aria-current="page" to="/home/addcontact">Add Contact</Link>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" to="/home/contactlist">Contact lIst</Link>
+                    <Link class="nav-link" to="/home/contactlist">Contact list</Link>
                 </li>
             </ul>
         </div>
