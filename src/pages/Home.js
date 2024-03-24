@@ -8,21 +8,6 @@ import Header from '../components/Header';
 const Home = () => {
 
     const [contactlist, setContactlist] = useState([]);
-    const [userDetails, setUserDetails] = useState({});
-
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            try {
-                const response = await api.get('/api/user/root');
-                const { username, email, id } = response.data;
-                const firstName = username.split(' ')[0];
-                setUserDetails({ username, id, email, firstName });
-            } catch (error) {
-                console.error('Error fetching user details:', error);
-            }
-        };
-        fetchUserDetails();
-    }, []);
 
     const retrieveContacts = async () => {
         const response = await api.get('/api/contact');
@@ -57,7 +42,7 @@ const Home = () => {
 
     return (
         <div className='container'>
-            <Header user={userDetails} />
+            <Header />
             <Routes>
                 <Route exact path='/' element={<AddContact addContactHandler={addContactHandler} />} />
                 <Route exact path='/addcontact' element={<AddContact addContactHandler={addContactHandler} />} />

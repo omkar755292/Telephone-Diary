@@ -1,26 +1,19 @@
 import React, { useState } from 'react'
-import api from '../api/api';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useUserAuth } from '../context/UserAuthContext';
 
 const Login = () => {
-    const navigate = useNavigate();
+    const { login } = useUserAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     const add = async (e) => {
         e.preventDefault();
-        const user = { email, password };
-        try {
-            const response = await api.post('/api/user/login', user);
-            const accessToken = response.data.accessToken;
-            localStorage.setItem('token', accessToken);
-            navigate('/home');
-            setEmail('');
-            setPassword('');
+        const user = { email, password }
+        login(user);
+        setEmail('');
+        setPassword('');
 
-        } catch (error) {
-            console.error('Login failed:', error.response.data);
-            alert('Login failed: ' + error.response.data.message);
-        }
     }
 
     return (

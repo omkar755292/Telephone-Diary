@@ -7,8 +7,7 @@ import Avatar from '../components/Avatar';
 const Authentication = () => {
 
   return (
-    <div className='index'>
-      <div className='container'>
+      <div className="container p-5 my-5 d-flex justify-content-center">
         <Avatar />
         <Routes >
           <Route exact path='/' element={<Login />} />
@@ -17,7 +16,6 @@ const Authentication = () => {
         </Routes>
 
       </div>
-    </div>
   )
 }
 
