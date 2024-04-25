@@ -1,10 +1,10 @@
 import React from 'react'
-import avtar from '../assets/images/avatar.svg'
+import avtar from '../assets/images/avatar.gif'
 
 const Avatar = () => {
     return (
-        <div>
-            <img src={avtar} alt="avtar" />
+        <div className='avatar'>
+            <img src={avtar} alt="avatar" />
         </div>
     )
 }
