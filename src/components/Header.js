@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../assets/images/logo.svg";
-import avtar from '../assets/images/avatar.svg';
+import avtar from '../assets/images/avatar.png';
 import Navbar from './Navbar';
 import { useUserAuth } from '../context/UserAuthContext';
 
