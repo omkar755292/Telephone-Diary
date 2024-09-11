@@ -33,12 +33,13 @@ const Home = () => {
         const getAllContacts = async () => {
             const storedContact = await retrieveContacts();
             if (storedContact) {
+                console.log(storedContact)
                 setContactlist(storedContact);
             }
         }
         getAllContacts();
 
-    }, [contactlist]);
+    }, []);
 
     return (
         <div className='container'>

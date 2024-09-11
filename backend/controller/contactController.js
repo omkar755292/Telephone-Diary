@@ -1,3 +1,4 @@
+const redisClient = require("../config/redisClient");
 const contactModel = require("../models/contactModel");
 const asyncHandler = require('express-async-handler')
 
@@ -6,6 +7,11 @@ const asyncHandler = require('express-async-handler')
 //access: Public
 const getContacts = asyncHandler(async (req, res) => {
     const contacts = await contactModel.find({ user_id: req.user.id });
+
+    // Set cache with 1-hour expiration
+    const key = req.user.id;
+    await redisClient.set(key, JSON.stringify(contacts), { EX: 360 });
+
     res.status(200).json(contacts);
 });
 
@@ -41,6 +47,10 @@ const createContact = asyncHandler(async (req, res) => {
         user_id: req.user.id
     });
 
+    // Clear cache after new contact is created
+    const key = req.user.id;
+    await redisClient.del(key);
+
     res.json(contact);
 });
 
@@ -53,11 +63,16 @@ const updateContact = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Contact not found");
     }
-    if(contact.user_id!=req.user.id){
+    if (contact.user_id != req.user.id) {
         res.status(401);
         throw new Error("user doesnot have permission to access this contact");
     }
     const updatedcontact = await contactModel.findByIdAndUpdate(req.params.id, req.body);
+
+      // Clear cache after contact update
+      const key = req.user.id;
+      await redisClient.del(key);
+  
     res.status(200).json(updatedcontact);
 });
 
@@ -71,11 +86,16 @@ const deleteContact = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('Contact Not Found');
     }
-    if(contact.user_id!=req.user.id){
+    if (contact.user_id != req.user.id) {
         res.status(401);
         throw new Error("user doesnot have permission to access this contact");
     }
-    const deletecontact = await contactModel.findByIdAndDelete(req.params.id)
+    const deletecontact = await contactModel.findByIdAndDelete(req.params.id);
+
+     // Clear cache after contact deletion
+     constkey = req.user.id;
+     await redisClient.del(key);
+
     res.status(200).json(deletecontact);
 });
 
@@ -83,7 +103,12 @@ const deleteContact = asyncHandler(async (req, res) => {
 //method: DELETE /api/contact/
 //access: Public
 const deleteContacts = asyncHandler(async (req, res) => {
-    const contacts = await contactModel.deleteMany({user_id: req.user.id});
+    const contacts = await contactModel.deleteMany({ user_id: req.user.id });
+
+     // Clear cache after deleting all contacts
+     const key = req.user.id;
+     await redisClient.del(key);
+     
     res.status(200).json(contacts);
 });
 
