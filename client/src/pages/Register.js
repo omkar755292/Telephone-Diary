@@ -1,33 +1,46 @@
 import React from 'react'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useUserAuth } from '../context/UserAuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/slices/authSlice';
 
 const Register = () => {
-  const { register } = useUserAuth();
-  const [username, setUserName] = useState('');
+
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const add = async (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     const user = { username, email, password };
-    register(user);
-    setUserName('');
+
+    // Dispatch the register action (thunk)
+    dispatch(register(user));
+
+    // Clear form fields
+    setUsername('');
     setEmail('');
     setPassword('');
-  }
+
+    navigate('/login');
+
+    
+  };
 
   return (
     <div className='container mt-3'>
-      <form onSubmit={add}>
+      <form onSubmit={handleRegister}>
         <div class="mb-3">
           <label class="form-label">Enter Your Full Name</label>
           <input type="name"
             class="form-control"
             id="name"
             value={username}
-            onChange={(e) => { setUserName(e.target.value) }} />
+            onChange={(e) => { setUsername(e.target.value) }} />
         </div>
         <div class="mb-3">
           <label class="form-label">Email address</label>
@@ -46,7 +59,16 @@ const Register = () => {
             value={password}
             onChange={(e) => { setPassword(e.target.value) }} />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button> &nbsp;<Link to="/login">Login</Link>
+        {/* Display loading indicator */}
+        {loading && <p>Loading...</p>}
+
+        {/* Display error message */}
+        {error && <p className="text-danger">{error}</p>}
+
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? 'Submitting...' : 'Submit'}
+        </button> &nbsp;
+        <Link to="/login">Login</Link>
       </form>
     </div>
   )

@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import logo from "../assets/images/logo.svg";
 import avtar from '../assets/images/avatar.png';
 import Navbar from './Navbar';
-import { useUserAuth } from '../context/UserAuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/slices/authSlice';
 
 const Header = () => {
-  const { userDetail, logout } = useUserAuth();
+
+  const dispatch = useDispatch();
+  const { userDetail} = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    logout();
+    dispatch(logout());
   };
 
   return (

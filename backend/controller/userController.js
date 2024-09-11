@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 //acces: public
 const userRegister = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
+    console.log(req.body)
     if (!username || !email || !password) {
         res.status(401);
         throw new Error("All Field are Mandatort");
@@ -34,6 +35,7 @@ const userRegister = asyncHandler(async (req, res) => {
 //acces: public
 const userLogin = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body)
     if (!email || !password) {
         res.status(401);
         throw new Error("All Fileds are mandatory");
