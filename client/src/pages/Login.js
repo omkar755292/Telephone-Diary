@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/slices/authSlice';
 
@@ -11,20 +11,25 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error} = useSelector((state) => state.auth);
+    const { loading, error } = useSelector((state) => state.auth);
 
     const handleLogin = async (e) => {
+
         e.preventDefault();
         const user = { email, password };
-    
-        // Dispatch the login action and wait for the result
-        const result = await dispatch(login(user));
-    
-        // Check if login was successful before navigating
-        if (login.fulfilled.match(result)) {
-            navigate('/home');
+
+        try {
+            const result = await dispatch(login(user));
+
+            if (login.fulfilled.match(result)) {
+                navigate('/home');
+            }
+
+        } catch (error) {
+            console.log(error);
         }
-    
+
+        // Reset form fields
         setEmail('');
         setPassword('');
     };
@@ -57,7 +62,7 @@ const Login = () => {
                     {loading && <p>Loading...</p>}
 
                     {/* Display error message */}
-                    {error && <p className="text-danger">{error}</p>}
+                    {error && <p className="text-danger">{error.message}</p>}
 
                     <button type="submit" className="btn btn-primary" disabled={loading}>
                         {loading ? 'Submitting...' : 'Submit'}

@@ -69,10 +69,10 @@ const updateContact = asyncHandler(async (req, res) => {
     }
     const updatedcontact = await contactModel.findByIdAndUpdate(req.params.id, req.body);
 
-      // Clear cache after contact update
-      const key = req.user.id;
-      await redisClient.del(key);
-  
+    // Clear cache after contact update
+    const key = req.user.id;
+    await redisClient.del(key);
+
     res.status(200).json(updatedcontact);
 });
 
@@ -92,9 +92,9 @@ const deleteContact = asyncHandler(async (req, res) => {
     }
     const deletecontact = await contactModel.findByIdAndDelete(req.params.id);
 
-     // Clear cache after contact deletion
-     constkey = req.user.id;
-     await redisClient.del(key);
+    // Clear cache after contact deletion
+    const key = req.user.id;
+    await redisClient.del(key);
 
     res.status(200).json(deletecontact);
 });
@@ -105,10 +105,10 @@ const deleteContact = asyncHandler(async (req, res) => {
 const deleteContacts = asyncHandler(async (req, res) => {
     const contacts = await contactModel.deleteMany({ user_id: req.user.id });
 
-     // Clear cache after deleting all contacts
-     const key = req.user.id;
-     await redisClient.del(key);
-     
+    // Clear cache after deleting all contacts
+    const key = req.user.id;
+    await redisClient.del(key);
+
     res.status(200).json(contacts);
 });
 

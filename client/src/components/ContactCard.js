@@ -6,7 +6,7 @@ const ContactCard = (props) => {
             <li class="list-group-item d-flex justify-content-between align-items-start" key={props.contact._id}>
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">
-                     Name: {props.contact.name}
+                        Name: {props.contact.name}
                     </div>
                     <div >
                         Email: {props.contact.email}
@@ -14,9 +14,9 @@ const ContactCard = (props) => {
                     <div >
                         Phone: {props.contact.phone}
                     </div>
-                    <div >
+                    {/* <div >
                         Id: {props.contact._id}
-                    </div>
+                    </div> */}
                 </div>
                 <i class="fa-solid fa-trash-can" onClick={() => { props.deleteContact(props.contact._id) }}></i>
             </li>
