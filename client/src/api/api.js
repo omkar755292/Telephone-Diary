@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Create an Axios instance with baseURL from environment variable
 const api = axios.create({
     baseURL: process.env.REACT_APP_BASEURL,
     headers: {
