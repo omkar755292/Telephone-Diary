@@ -8,6 +8,7 @@ import Authentication from './pages/Authentication';
 import ProtectedRoute from './components/ProtectedRoute.js';
 import { useDispatch } from 'react-redux';
 import { verifyToken } from './redux/slices/authSlice.js';
+import AuthProtectedRoute from './components/AuthProtectedRoutes.js';
 
 function App() {
 
@@ -25,7 +26,10 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route exact path='/*' element={<Authentication />} />
+          <Route exact path='/*' element={<AuthProtectedRoute>
+            <Authentication />
+          </AuthProtectedRoute>
+          } />
           <Route exact path='/home/*' element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
         </Routes>
       </Router>
